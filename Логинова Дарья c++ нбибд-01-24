@@ -1,0 +1,17 @@
+include <iostream>
+using namespace std;
+int main()
+{
+double x1,y1,x2,y2;
+cout << "введите координату x1: ";
+cin >> x1;
+cout << "Введите координату у1: ";
+cin >> y1;
+cout << "Введите координату x2: ";
+cin >> x2;
+cout << "Введите координату у2: ";
+cin >> y2;
+double scalar_product =x1*x2+y1*y2;
+cout<<"Скалярное произведение равно: " << scalar_product<< endl;
+return 0;
+}
