@@ -1,0 +1,11 @@
+a=int(input("Введите первое число: "))
+b=int(input("Введите второе число: "))
+c=int(input("Введите третье число: "))
+d=int(input("Введите четвертое число: "))
+diff1= b-a
+diff2= c-b
+diff3= d-c
+if diff1 == diff2 and diff2 ==diff3:
+print ("образуют.")
+else:
+print("не образуют.")
