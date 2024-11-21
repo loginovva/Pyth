@@ -1,0 +1,19 @@
+import math
+
+def count_points_in_circle(n, r, a, b):
+    inside_count = 0
+    for x in range(-n, n+1):
+        y = math.sqrt((r**2 - (x - a)**2) / 2)
+        if x >= 0 and x <= n and y > 0 and y < r:
+            inside_count += 1
+    return inside_count
+
+
+n = int(input("Введите n: "))
+r = float(input("Введите r: "))
+a = float(input("Введите a: "))
+b = float(input("Введите b: "))
+
+
+result = count_points_in_circle(n, r, a, b)
+print(result)
