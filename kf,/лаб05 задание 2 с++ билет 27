@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b; 
+    
+    for (int i = 0; i < 10; ++i) {
+        cout << "Введите первое число пары: ";
+        cin >> a;
+        cout << "Введите второе число пары: ";
+        cin >> b;
+        
+        if (a > b) {
+            cout << "Больше число: " << a << endl;
+        } else {
+            cout << "Больше число: " << b << endl;
+        }
+    }
+    
+    return 0;
+}
+
