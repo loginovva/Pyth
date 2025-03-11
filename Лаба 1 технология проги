@@ -1,0 +1,117 @@
+#include <iostream>
+#include <string>
+using namespace std;
+struct Node{
+    string dumb;
+    int kup;
+    double pull;
+    Node *next;
+};
+//начало списка
+void AddFirst (Node*& Head, string dumb, int kup, double pull){
+    Node *NewNode=new Node;
+    NewNode->dumb=dumb;
+    NewNode->kup=kup;
+    NewNode->pull=pull;
+    NewNode->next=Head;
+    Head=NewNode;
+    return;
+}
+//конец списка
+void AddLast(Node *&Head, string dumb, int kup, double pull){
+    Node *tmp=Head;
+    if (Head== NULL){ AddFirst(Head, dumb, kup, pull);
+                      return; }
+    while (tmp->next) tmp=tmp->next;
+    Node *NewNode=new Node;
+    NewNode->dumb=dumb;
+    NewNode->kup=kup;
+    NewNode->pull=pull;
+    NewNode->next=NULL;
+    tmp->next=NewNode;
+    return;
+}
+//после заданного
+int AddAfter(Node *Head, string dumb, int kup, double pull, string NameAfter){
+    if (Head==NULL) return 1;
+    Node *tmp=Head;
+    while(tmp!=NULL && tmp->dumb!= NameAfter){
+        tmp=tmp->next;
+    }
+    if (tmp==NULL) return 1;
+    Node *NewNode=new Node;
+    NewNode->dumb=dumb;
+    NewNode->kup=kup;
+    NewNode->pull=pull;
+    NewNode->next=tmp->next;
+    tmp->next=NewNode;
+    return 0;
+}
+//перед заданным
+int AddBefore(Node *&Head, string dumb, int kup, double pull, string NameBefore){
+    if (Head==NULL) return 1;
+    if (Head->dumb==NameBefore){
+        AddFirst(Head, dumb, kup, pull); return 0;
+    }
+    if (Head->next==NULL) return 1;
+    Node *prev=Head, *tmp=Head->next;
+    while(tmp->next!=NULL && tmp->dumb!=NameBefore){
+        prev=prev->next; tmp=tmp->next;
+    }
+    if (tmp->next==NULL && tmp->dumb!=NameBefore) return 1;
+    Node *NewNode=new Node;
+    NewNode->dumb=dumb;
+    NewNode->kup=kup;
+    NewNode->pull=pull;
+    NewNode->next=tmp;
+    prev->next=NewNode;
+    return 0;
+}
+//удаление
+int DelNode(Node *&Head, string DelName){
+    if (Head==NULL) return 1;
+    Node *tmp=Head;
+    if (Head->dumb==DelName){
+        Head=Head->next; delete tmp; return 0;
+    }
+    if (Head->next ==NULL) return 1;
+    Node *prev =Head; tmp=Head->next;
+    while (tmp->next!=NULL && tmp->dumb!=DelName){
+        prev=prev->next; tmp=tmp->next;
+    }
+    if (tmp->next==NULL && tmp->dumb!=DelName) return 1;
+    prev->next=tmp->next;
+    delete tmp;
+    return 0;
+}
+//вывод
+void PrintList(Node *Head){
+    if (Head==NULL){
+        cout<<"The list is empty"; return;
+    }
+    Node *tmp = Head;
+    while (tmp!=NULL){
+        cout<<"Product: "<<tmp->dumb<<"\nkup: "<<tmp->kup<<"\npull: "<<tmp->pull<<"\n\n";
+        tmp=tmp->next;
+    }
+    return;
+}
+//функция main 
+int main(){
+    Node *Head=NULL;
+    AddLast(Head, "stuart", 30, 50000);
+    AddLast(Head, "Bob", 25, 45000);
+    AddFirst(Head, "kevin", 35, 55000);
+    cout<<"Initial List: "<<endl;
+    PrintList(Head);
+    AddAfter(Head,"mari", 28, 48000, "stuart");
+    cout<<"\nList after adding mari after stuart: "<<endl;
+    PrintList(Head);
+    AddBefore(Head, "Eve", 22, 43000, "Bob");
+    cout<<"\nList after adding Eve before Bob: "<<endl;
+    PrintList(Head);
+    DelNode(Head, "stuart");
+    cout<<"\nList after deleting stuart: "<<endl;
+    PrintList(Head);
+    return 0;
+}
